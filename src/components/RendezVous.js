@@ -18,7 +18,7 @@ class RendezVous extends Component {
       errorPhone: false,
       errorAdresse: false,
       errorMessage: [],
-      eventsList: [],
+      eventsList: props.eventsList,
       showModal: false,
       showModalMobile: false,
       fromSend: false,
@@ -116,23 +116,31 @@ class RendezVous extends Component {
     var hoursDisplay = this.state.hoursDisplay
     eventsList.map((event) => {
       var dateEventStart = moment(event.start)
-      var dateEventEnd = moment(event.start).add(1, 'hours').add(30, 'minutes')
+      var dateEventEnd = moment(event.end)
       if (date.format('MMMM Do YYYY') === dateEventStart.format('MMMM Do YYYY')) {
-        var pos = hoursDisplay.map((time, i) => {
-          return time.hour
-        }).indexOf(dateEventStart.hour())
-        if (pos !== -1) {
-          hoursDisplay[pos].display = false
-        } else {
-          hoursDisplay.map((time, i) => {
-            if (time.hour < dateEventStart.hour() && hoursDisplay[i + 1].hour > dateEventStart.hour()) {
+        hoursDisplay.map((time, i) => {
+          if (dateEventStart.hour() === time.hour) {
+            if (dateEventStart.minute() === time.minute) {
               hoursDisplay[i].display = false
-              if (hoursDisplay[i + 1].hour === dateEventEnd.hour() && hoursDisplay[i + 1].minute < dateEventEnd.minute()) {
-                hoursDisplay[i + 1].display = false
+            } else if (dateEventStart.minute() > time.minute) {
+              hoursDisplay[i].display = false
+            } else {
+              if (i !== 0) {
+                hoursDisplay[i - 1].display = false
               }
+              hoursDisplay[i].display = false
             }
-          })
-        }
+          } else if (dateEventStart.hour() > time.hour &&
+            dateEventStart.hour() - time.hour === 1 &&
+            dateEventStart.hour() < hoursDisplay[hoursDisplay.length - 1].hour) {
+            hoursDisplay[i].display = false
+            if (dateEventEnd.hour() === hoursDisplay[i + 1].hour) {
+              hoursDisplay[i + 1].display = false
+            }
+          } else if (dateEventStart.hour() > hoursDisplay[hoursDisplay.length - 1].hour && dateEventStart.minute() < 30) {
+            hoursDisplay[hoursDisplay.length - 1].display = false
+          }
+        })
       }
 
       if (date.day() === 2) {
@@ -251,13 +259,13 @@ class RendezVous extends Component {
         closeIcon={<Icon name='close' onClick={this.resetData} />}
         trigger={
           <Label as='a' color='blue' onClick={this.showModal} size='large'>
-            <Icon name='calendar' />
+            <Icon name='calendar alternate' />
             Rendez-vous
           </Label>
         }
       >
         <Modal.Header>
-          <Icon name='calendar' color='blue' />
+          <Icon name='calendar alternate' color='blue' />
           Prise de rendez-vous
         </Modal.Header>
         <Modal.Content>
@@ -298,16 +306,17 @@ class RendezVous extends Component {
                           this.state.selectTime && <Menu fluid vertical>
                             {
                               this.state.hoursDisplay.map((item, key) => {
+                                if (item.minute === 0) { item.minute = '00' }
                                 if (item.display) {
                                   return (
                                     <Menu.Item key={key} active={this.state.timeSelected === item} onClick={(time) => this.selectedTime(item)}>
-                                      {item.hour} : {item.minute === 0 ? '00' : item.minute}
+                                      {item.hour} : {item.minute}
                                     </Menu.Item>
                                   )
                                 } else {
                                   return (
                                     <Menu.Item key={key} active={false} disabled>
-                                      {item.hour} : {item.minut === 0 ? '00' : item.minute}
+                                      {item.hour} : {item.minute}
                                     </Menu.Item>
                                   )
                                 }
@@ -335,7 +344,7 @@ class RendezVous extends Component {
                       vous avez pris rdv pour le :
                       <Divider hidden />
                       <Label size='big'>
-                        <Icon name='calendar' /> {this.state.dateSelected.format('LLLL')}
+                        <Icon name='calendar alternate' /> {this.state.dateSelected.format('LLLL')}
                       </Label>
                       <Divider hidden />
                       Pour finaliser le rendez-vous veuillez renseigner les informations suivantes :

@@ -3,7 +3,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --progress --host alix-braem-osteopathe-limours.fr --port 3020",
+    "start": "webpack-dev-server --mode development --progress",
     "build": "webpack --mode production --progress"
   },
   "dependencies": {

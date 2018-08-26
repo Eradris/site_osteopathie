@@ -5,7 +5,6 @@ import Parser from 'html-react-parser'
 
 class Item extends Component {
   render () {
-    console.log(this.props.mobile)
     return (
       <Grid.Column textAlign='center' width={this.props.mobile ? 15 : null} className={(this.props.id % 2 !== 0 && this.props.mobile) ? 'printBgPourquoi' : ''}>
         { this.props.mobile && this.props.isIcon && this.props.id === 0 && <Divider hidden /> }
@@ -14,14 +13,16 @@ class Item extends Component {
           this.props.isImage && <Image
             centered
             circular={this.props.circular}
-            size={this.props.circular ? 'small' : ''} src={Parser(this.props.img)}
+            size='small' src={Parser(this.props.img)}
           />
         }
         { this.props.isImage && <Divider hidden /> }
         {
           this.props.isImage && <Header
             style={this.props.color ? {color: this.props.color} : {}}
-            as='h2'>{Parser(this.props.name.replace('<p>', '').replace('</p>', ''))}
+            as='h2'
+          >
+            {Parser(this.props.name.replace('<p>', '').replace('</p>', ''))}
           </Header>
         }
         {
