@@ -105,7 +105,7 @@ class Calendar extends Component {
       })
     }
 
-    const date = moment().add(1, 'days')
+    const date = moment().add(2, 'days')
     date.hour(0)
     date.minute(0)
     date.second(0)

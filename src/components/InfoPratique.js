@@ -83,6 +83,16 @@ class InfoPratique extends Component {
                   {Parser(this.state.email.replace('<p>', '').replace('</p>', ''))}
                 </Label>
                 <Divider hidden />
+                <RendezVous
+                  resetModal={() => this.props.resetModal()}
+                  addRdv={(slotInfo) => this.props.addRdv(slotInfo)}
+                  data={this.props.data}
+                  distanceValider={this.props.distanceValider}
+                  eventsList={this.props.eventsList}
+                  socket={this.props.socket}
+                  eventAdded={this.props.eventAdded}
+                />
+                <Divider hidden />
                 <Divider hidden />
               </Grid.Column>
               <Grid.Column textAlign='center' width={15}>
