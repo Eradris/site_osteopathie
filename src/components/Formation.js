@@ -16,7 +16,7 @@ class Formation extends Component {
   render () {
     return (
       <Grid.Row id='formation' className={this.props.typeRow}>
-        <Grid centered>
+        <Grid centered style={{width: '100%'}}>
           <Grid.Column textAlign='center' only='computer tablet' width={10}>
             <Divider hidden />
             <Divider hidden />

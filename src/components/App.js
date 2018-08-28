@@ -40,11 +40,11 @@ class App extends Component {
 
   takeAction (response) {
     if (response.type === 'eventsList') {
-      var eventsConvert = response.data.map((event) => {
-        var start = new Date(event.start)
-        var end = new Date(event.end)
-        var title = event.title
-        var eventConvert = {start: start, end: end, title: title}
+      let eventsConvert = response.data.map((event) => {
+        let start = new Date(event.start)
+        let end = new Date(event.end)
+        let title = event.title
+        let eventConvert = {start: start, end: end, title: title}
         return eventConvert
       })
       this.setState({eventsList: eventsConvert})
@@ -139,7 +139,7 @@ class App extends Component {
     } else {
       return (
         <Grid textAlign='center'>
-          <Visibility onUpdate={this.handleUpdate}>
+          <Visibility onUpdate={this.handleUpdate} style={{width: '100%'}}>
             <HeaderSite fixeMenu={this.state.fixeMenu} />
             <InfoPratique
               data={this.state.information}

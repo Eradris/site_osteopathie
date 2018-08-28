@@ -17,9 +17,11 @@ body{
     margin-left: 0!important;
     margin-right: 0!important;
 }
+
 .rowTwo{
   background-color: #5884a5;
   color: white;
+  width: 100%;
 }
 
 .customConsultation{

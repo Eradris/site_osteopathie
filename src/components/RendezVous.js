@@ -95,12 +95,12 @@ class RendezVous extends Component {
   }
 
   validForm () {
-    var name = this.state.formFirstName + ' ' + this.state.formLastName
-    var phone = this.state.formPhone
-    var adresse = this.state.address
-    var dateSelected = this.state.dateSelected
+    let name = this.state.formFirstName + ' ' + this.state.formLastName
+    let phone = this.state.formPhone
+    let adresse = this.state.address
+    let dateSelected = this.state.dateSelected
 
-    var data = {
+    let data = {
       name: name,
       phone: phone,
       adresse: adresse,
@@ -112,11 +112,11 @@ class RendezVous extends Component {
   }
 
   selectTime (date) {
-    var eventsList = this.state.eventsList
-    var hoursDisplay = this.state.hoursDisplay
+    let eventsList = this.state.eventsList
+    let hoursDisplay = this.state.hoursDisplay
     eventsList.map((event) => {
-      var dateEventStart = moment(event.start)
-      var dateEventEnd = moment(event.end)
+      let dateEventStart = moment(event.start)
+      let dateEventEnd = moment(event.end)
       if (date.format('MMMM Do YYYY') === dateEventStart.format('MMMM Do YYYY')) {
         hoursDisplay.map((time, i) => {
           if (dateEventStart.hour() === time.hour) {
@@ -142,13 +142,9 @@ class RendezVous extends Component {
           }
         })
       }
-
-      if (date.day() === 2) {
-        hoursDisplay[3].display = false
-      }
     })
 
-    var firstHour = hoursDisplay.find((item) => {
+    let firstHour = hoursDisplay.find((item) => {
       return item.display === true
     })
 
@@ -166,7 +162,7 @@ class RendezVous extends Component {
   }
 
   selectedTime (time) {
-    var date = this.state.dateSelected
+    let date = this.state.dateSelected
     date.hour(time.hour)
     date.minute(time.minute)
     this.setState({
@@ -256,13 +252,15 @@ class RendezVous extends Component {
     return (
       <Modal
         open={this.state.showModal}
-        closeIcon={<Icon name='close' onClick={this.resetData} />}
+        closeOnEscape
+        closeIcon={<Icon name='close'onClick={this.resetData} />}
         trigger={
           <Label as='a' color='blue' onClick={this.showModal} size='large'>
             <Icon name='calendar alternate' />
             Rendez-vous
           </Label>
         }
+        onClose={this.resetData}
       >
         <Modal.Header>
           <Icon name='calendar alternate' color='blue' />

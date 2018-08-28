@@ -40,18 +40,18 @@ class Calendar extends Component {
   }
 
   onSelect (date) {
-    var eventList = this.props.eventsList
-    var initDisabledHour = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 19, 20, 21, 22, 23, 24]
-    var setDefaultHour = []
+    let eventList = this.props.eventsList
+    let initDisabledHour = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 19, 20, 21, 22, 23, 24]
+    let setDefaultHour = []
     if (date === null) {
       this.setState({
         showTime: false,
         mode: 'date'
       })
     } else {
-      var disabledHour = []
+      let disabledHour = []
       eventList.map((event) => {
-        var dateEvent = moment(event.start)
+        let dateEvent = moment(event.start)
         if (dateEvent.format('MMMM Do YYYY') === date.format('MMMM Do YYYY')) {
           if (disabledHour.indexOf(dateEvent.hour()) === -1) {
             disabledHour.push(dateEvent.hour())
@@ -64,7 +64,7 @@ class Calendar extends Component {
         }
       })
 
-      for (var i = 0; i <= 24; i++) {
+      for (let i = 0; i <= 24; i++) {
         if (initDisabledHour.indexOf(i) === -1) {
           setDefaultHour.push(i)
         }
@@ -92,11 +92,11 @@ class Calendar extends Component {
       return false
     }
 
-    var disabledHour = []
+    let disabledHour = []
 
     if (this.props.eventsList) {
       this.props.eventsList.map((event) => {
-        var dateEvent = moment(event.start)
+        let dateEvent = moment(event.start)
         if (dateEvent.format('MMMM Do YYYY') === current.format('MMMM Do YYYY')) {
           if (disabledHour.indexOf(dateEvent.hour()) === -1) {
             disabledHour.push(dateEvent.hour())
@@ -113,12 +113,12 @@ class Calendar extends Component {
   }
 
   disabledTime (date) {
-    var eventList = this.props.eventsList
-    var initDisabledHour = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 19, 20, 21, 22, 23, 24]
+    let eventList = this.props.eventsList
+    let initDisabledHour = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 19, 20, 21, 22, 23, 24]
     if (date) {
-      var disabledHour = []
+      let disabledHour = []
       eventList.map((event) => {
-        var dateEvent = moment(event.start)
+        let dateEvent = moment(event.start)
         if (dateEvent.format('MMMM Do YYYY') === date.format('MMMM Do YYYY')) {
           if (disabledHour.indexOf(dateEvent.hour()) === -1) {
             disabledHour.push(dateEvent.hour())
