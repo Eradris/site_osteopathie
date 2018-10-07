@@ -4,7 +4,7 @@ import { Grid, Header, Divider, Icon, Label } from 'semantic-ui-react'
 import Parser from 'html-react-parser'
 
 import MyGoogleMap from './MyGoogleMap'
-import RendezVous from './RendezVous'
+// import RendezVous from './RendezVous'
 
 class InfoPratique extends Component {
   constructor (props) {
@@ -40,7 +40,7 @@ class InfoPratique extends Component {
                   {Parser(this.state.email.replace('<p>', '').replace('</p>', ''))}
                 </Label>
                 <Divider hidden />
-                <RendezVous
+                {/* <RendezVous
                   resetModal={() => this.props.resetModal()}
                   addRdv={(slotInfo) => this.props.addRdv(slotInfo)}
                   data={this.props.data}
@@ -48,7 +48,7 @@ class InfoPratique extends Component {
                   eventsList={this.props.eventsList}
                   socket={this.props.socket}
                   eventAdded={this.props.eventAdded}
-                />
+                /> */}
               </Grid.Column>
               <Grid.Column textAlign='center' width={7}>
                 <MyGoogleMap
@@ -83,7 +83,7 @@ class InfoPratique extends Component {
                   {Parser(this.state.email.replace('<p>', '').replace('</p>', ''))}
                 </Label>
                 <Divider hidden />
-                <RendezVous
+                {/* <RendezVous
                   resetModal={() => this.props.resetModal()}
                   addRdv={(slotInfo) => this.props.addRdv(slotInfo)}
                   data={this.props.data}
@@ -91,7 +91,7 @@ class InfoPratique extends Component {
                   eventsList={this.props.eventsList}
                   socket={this.props.socket}
                   eventAdded={this.props.eventAdded}
-                />
+                /> */}
                 <Divider hidden />
                 <Divider hidden />
               </Grid.Column>
@@ -116,12 +116,12 @@ class InfoPratique extends Component {
 InfoPratique.propTypes = {
   typeRow: PropTypes.string,
   data: PropTypes.object,
-  distanceValider: PropTypes.bool,
-  eventsList: PropTypes.array,
-  resetModal: PropTypes.func,
-  addRdv: PropTypes.func,
-  socket: PropTypes.object,
-  eventAdded: PropTypes.bool
+  // distanceValider: PropTypes.bool,
+  // eventsList: PropTypes.array,
+  // resetModal: PropTypes.func,
+  // addRdv: PropTypes.func,
+  // socket: PropTypes.object,
+  // eventAdded: PropTypes.bool
 }
 
 export default InfoPratique
